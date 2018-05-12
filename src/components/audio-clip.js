@@ -8,8 +8,6 @@ export default class AudioClip
         this.masterGain = inGain;
         this.callback = inCbFunk;
         this.gain = this._audioContext.createGain();
-//         this.gain.connect(this.masterGain);
-        this.isReadyToPlay = false;
     }
 
     play(inRate, inGain = 1.0) 

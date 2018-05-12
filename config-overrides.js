@@ -8,6 +8,11 @@ module.exports = (config, env) => {
     });
     config.module.rules.push(
     {
+      test : /\.(eot|ttf|wav|mp3)$/,
+      loader : "file-loader",
+    });
+    config.module.rules.push(
+    {
       test: /bootstrap\/dist\/js\/umd\//,
       loader: 'imports-loader?jQuery=jquery'
     });

@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "jquery": "^3.3.1",
     "pepjs": "^0.4.3",
     "react": "^16.3.2",
     "react-app-rewire-provide-plugin": "^1.0.0",
     "react-app-rewired": "^1.5.2",
     "react-dom": "^16.3.2",
+    "react-pointable": "^1.1.1",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
