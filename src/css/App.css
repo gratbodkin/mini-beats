@@ -24,10 +24,10 @@ body {
     left: 0px;
     top: 0px;
     display: grid;
-    grid-template-rows: 50px 200px 200px 250px;
-    grid-template-columns: 150px 400px 400px 150px;
-    height: 700px;
-    width: 1100px;
+    grid-template-rows: 30px 280px 398px 60px;
+    grid-template-columns: 100px 824px 100px;
+    height: 768px;
+    width: 1024px;
     background-size: 100% 100%;
 }
 
@@ -45,31 +45,74 @@ body {
     background-size: 100% 100%;
 }
 
-.pads1 {
+.knob,.knob-dot {
+    height: 60px;
+    width:60px;
+    margin: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
+}
+
+.radio-button {
+     grid-row-start: 1;
+    height: 35px;
+    width:55px;
+    background-size: 100% 100%;
+    margin-left: 22.5px;
+}
+
+.knob.r1 {
+     grid-row-start:2;
+}
+.knob.r2 {
+     grid-row-start: 3;
+}
+.knob.r3 {
+     grid-row-start: 4;
+}
+.pad-button {
+     grid-row-start: 5;
+}
+
+
+.knob-dot {
+   background-position: 0px 0px;
+}
+
+.channels {
     grid-column-start: 2;
     grid-column-end: 3;
-    grid-row-start: 4;
+    grid-row-start: 3;
     grid-row-end: 4;
 }
 
-.pads2 {
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 4;
-    grid-row-end: 4;
+.channel {
+    display: grid;
+    grid-template-rows: 40px 80px 80px 80px 100px;
+    grid-template-columns: 100%;
 }
 
+.pads {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    display: grid;
+    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+}
 
 .screen-container {
     display: grid;
     grid-template-rows: 200px;
-    grid-template-columns: 350px 400px 350px;
-    grid-column-start: 1;
+    grid-template-columns: 200px 400px 200px;
+    grid-column-start: 2;
     grid-row-start: 2;
 }
 
 .screen {
     background-size: 100% 100%;
-    grid-column-start: 3;
-    grid-row-start: 2;
+    grid-column-start: 2;
+    grid-row-start: 1;
 }

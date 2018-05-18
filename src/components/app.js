@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import logo from '../assets/logo.svg';
 import '../css/App.css';
-import AudioClipEngine from "./audio-clip-engine";
+import AudioBufferLoader from "./audio-buffer-loader";
 import Pads from './pads';
+import PadParams from './pad-params';
 import Screen from "./screen";
-import BGImg from "../assets/img/bg-rough.png";
+import Transport from "./transport";
+import BGImg from "../assets/img/background.png";
 
 class App extends Component {
     constructor(props)
@@ -15,7 +17,7 @@ class App extends Component {
         try 
         {
             this._audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            this._audioClipEngine = new AudioClipEngine(this._audioContext, (inClipTags) => {
+            this._audioClipEngine = new AudioBufferLoader(this._audioContext, (inClipTags) => {
                 this.clipTags = inClipTags;
                 this.clipsReady = true;
             });
@@ -35,12 +37,12 @@ class App extends Component {
         const style = {
             backgroundImage: 'url(' + BGImg + ')'
         };
+        const waveform = this.clipsReady ? this._audioClipEngine.getClip("kick1") : null;
         return (
           <div className="App">
             <div className="panel-bg" style={ style }>
-                <Screen></Screen>
-                {this.clipsReady ? <Pads className="pads1 pads" clips={this.clipTags} onChange={this.ctrlChanged}></Pads> : null}
-                {this.clipsReady ? <Pads className="pads2 pads" clips={this.clipTags} onChange={this.ctrlChanged}></Pads> : null}
+                <Screen waveform={waveform}></Screen>
+                {this.clipsReady ? <Pads className="pads" clips={this.clipTags} onChange={this.ctrlChanged}></Pads> : null}
             </div>
           </div>
         );

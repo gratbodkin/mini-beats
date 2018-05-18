@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import PadOffBtn from "../assets/img/btn-pad-off.png";
-import PadOnGreen from "../assets/img/btn-blu-out-light.png";
+import BtnOff from "../assets/img/btn-black-off.png";
+import BtnOn from "../assets/img/btn-black-on.png";
 import PEP from "pepjs";
 import $ from "jquery";
 
-export default class PadButton extends Component {
+export default class RadioButton extends Component {
     constructor(props)
     {
         super(props);
@@ -42,12 +42,12 @@ export default class PadButton extends Component {
    
 
     render() {
-        const bg = this.state.isToggleOn ? PadOnGreen : PadOffBtn;
+        const bg = this.state.isToggleOn ? BtnOn : BtnOff;
         const style = {
             backgroundImage: 'url(' + bg + ')'
         };
         return (
-            <div className="pad-button" 
+            <div className="radio-button" 
             ref={node => this.el = node}
             style={style}
             ></div>

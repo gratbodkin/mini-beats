@@ -1,7 +1,7 @@
 import AudioClip from "./audio-clip";
 import {Files} from "../audio-importer";
 
-export default class AudioClipEngine
+export default class AudioBufferLoader
 {
 	constructor(inContext, inCBFunk)
 	{
@@ -36,6 +36,11 @@ export default class AudioClipEngine
 			  	console.warn("no clip found with name: " + tag);
 			}
 	  	});
+	}
+
+	getClip(inTag)
+	{
+		return this._audioClips[inTag];
 	}
 
 	async loadClips(inMap) 

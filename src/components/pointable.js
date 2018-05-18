@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import PadOffBtn from "../assets/img/btn-pad-off.png";
-import PadOnGreen from "../assets/img/btn-blu-out-light.png";
 import PEP from "pepjs";
 import $ from "jquery";
 
-export default class PadButton extends Component {
+export default class Pointable extends Component {
     constructor(props)
     {
         super(props);
-        this.state = {isToggleOn: false};
+    }
+
+    getDefaultProps()
+    {
+        return {
+            draggable: false,
+            range: 0
+        };
     }
 
     componentDidMount() 
@@ -18,36 +23,40 @@ export default class PadButton extends Component {
 
     componentWillUnmount() 
     {
-
+        $(this.el).off("pointerdown");
     }
 
     pointerDown = (e) => 
     {
         this.el.setPointerCapture(e.pointerId);
+        if(this.props.draggable)
+        {
+            $(this.el).on("pointermove", this.pointerUp);
+        }
         $(this.el).on("pointerup", this.pointerUp);
-        this.setState(prevState => ({
-          isToggleOn: true
-        }));
-        this.props.onPadTouch(this.key);
     }
 
     pointerUp = (e) => 
     {
         this.el.releasePointerCapture(e.pointerId);
         $(this.el).off("pointerup");
-        this.setState(prevState => ({
-          isToggleOn: false
-        }));
+        if(this.props.draggable)
+        {
+            $(this.el).off("pointermove");
+        }
+    }
+
+    pointerMoved = (e) => 
+    {
+        const deltaX = -e.originalEvent.deltaX;
+        const deltaY = -e.originalEvent.deltaY;
+        const mouseDiff = deltaX - deltaY;
     }
    
 
     render() {
-        const bg = this.state.isToggleOn ? PadOnGreen : PadOffBtn;
-        const style = {
-            backgroundImage: 'url(' + bg + ')'
-        };
         return (
-            <div className="pad-button" 
+            <div className="pointable" 
             ref={node => this.el = node}
             style={style}
             ></div>

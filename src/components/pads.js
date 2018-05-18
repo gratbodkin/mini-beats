@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import PadButton from './pad-button';
+import Channel from "./channel";
+
+const kNumChannels = 8;
 
 export default class Pads extends Component {
     constructor(props)
@@ -21,7 +23,7 @@ export default class Pads extends Component {
         return (
             <div className={this.props.className}>
                 {this.props.clips.map((el)=>{
-                    return <PadButton key={el} onPadTouch={this.onPadTouch}></PadButton>
+                    return <Channel className="channel" key={el} onPadTouch={this.onPadTouch}></Channel>
                 })}
             </div>
         );

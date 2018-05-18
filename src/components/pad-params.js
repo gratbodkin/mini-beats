@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import PadButton from './pad-button';
+import Knob from './knob';
 
-export default class Transport extends Component {
+export default class PadParams extends Component {
     constructor(props)
     {
         super(props);
@@ -20,7 +20,9 @@ export default class Transport extends Component {
     render() {
         return (
             <div className={this.props.className}>
-
+                <Knob onPadTouch={this.onPadTouch}></Knob>
+                <Knob onPadTouch={this.onPadTouch}></Knob>
+                <Knob onPadTouch={this.onPadTouch}></Knob>
             </div>
         );
     }

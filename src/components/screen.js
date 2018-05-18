@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScreenBG from "../assets/img/screen.png";
+import WaveSurfer from "wavesurfer.js";
 
 export default class Pads extends Component {
     constructor(props)
@@ -8,14 +8,24 @@ export default class Pads extends Component {
     }  
 
     render() {
-        const style = {
-            backgroundImage: 'url(' + ScreenBG + ')'
-        };
+        // const style = {
+        //     backgroundImage: 'url(' + ScreenBG + ')'
+        // };
+        if(this.props.waveform)
+        {
+            var wavesurfer = WaveSurfer.create({
+              container: '#waveform',
+              waveColor: 'red',
+              progressColor: 'purple'
+            });
+        }
         return (
+            <div className="screen-container">
+                
             <div className="screen" 
             ref={node => this.el = node}
-            style={style}
-            ></div>
+            ></div>  
+            </div>
         );
     }
 }
