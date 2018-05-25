@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Knob from './knob';
-import PadButton from "./pad-button";
-import RadioButton from "./radio-button";
+import Button from "./button";
+import SmBtnBG from "../assets/img/btn-black-off.png";
+import PadBG from "../assets/img/btn-pad-off.png";
+// import PadOffBtn from "../assets/img/pad-min.png";
 
 export default class Channel extends Component {
     constructor(props)
@@ -9,24 +11,22 @@ export default class Channel extends Component {
         super(props);
     }  
 
-    onPadTouch = () =>
+    onChange(e)
     {
-
-    };
-
-    onPadRelease = () =>
-    {
-
-    };
+        if(e.type === "down")
+        {
+            this.props.onChange({type: "play", id: this.props.tag});
+        }
+    }
 
     render() {
         return (
             <div className={this.props.className}>
-                <RadioButton className="radio-button" onPadTouch={this.onPadTouch}></RadioButton>
-                <Knob className="knob" onPadTouch={this.onPadTouch}></Knob>
-                <Knob className="knob" onPadTouch={this.onPadTouch}></Knob>
-                <Knob className="knob" onPadTouch={this.onPadTouch}></Knob>
-                <PadButton onPadTouch={this.onPadTouch}></PadButton>
+                <Button bg={SmBtnBG} color={this.props.color} className="radio outline" onChange={e => this.onChange(e)}></Button>
+                <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <Button bg={PadBG} color={this.props.color} className="pad fill" onChange={e => this.onChange(e)}></Button>
             </div>
         );
     }

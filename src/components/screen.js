@@ -5,26 +5,33 @@ export default class Pads extends Component {
     constructor(props)
     {
         super(props);
+    }
+
+    componentDidMount() 
+    {   
+        this.wavesurfer = WaveSurfer.create({
+          container: this.el,
+          waveColor: 'red',
+          progressColor: 'purple'
+        });
+    }
+
+    componentWillUnmount() 
+    {
+
     }  
 
     render() {
-        // const style = {
-        //     backgroundImage: 'url(' + ScreenBG + ')'
-        // };
-        if(this.props.waveform)
+
+        if(this.props.clip)
         {
-            var wavesurfer = WaveSurfer.create({
-              container: '#waveform',
-              waveColor: 'red',
-              progressColor: 'purple'
-            });
+            this.wavesurfer.loadDecodedBuffer(this.props.clip._buffer)
         }
         return (
             <div className="screen-container">
-                
-            <div className="screen" 
-            ref={node => this.el = node}
-            ></div>  
+                <div className="screen" 
+                ref={node => this.el = node}
+                ></div>  
             </div>
         );
     }

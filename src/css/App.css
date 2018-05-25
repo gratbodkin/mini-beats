@@ -12,11 +12,7 @@ img{
 body {
     position: absolute;
     overflow: hidden;
-}
-
-.App {
-    text-align: center;
-    overflow-x: hidden;
+    touch-action: none;
 }
 
 .panel-bg {
@@ -26,75 +22,177 @@ body {
     display: grid;
     grid-template-rows: 30px 280px 398px 60px;
     grid-template-columns: 100px 824px 100px;
+    justify-items: center;
     height: 768px;
     width: 1024px;
     background-size: 100% 100%;
+    touch-action: none;
 }
-
 .hidden {
     display: none;
 }
-
-.pad-button {
-    position: relative;
-    display: inline-block;
+.radio.button {
+    margin: auto;
+    height: 40px;
+    width: 63px;
+    top: 0px;
+    left: 0px;
+    background-size: 100% 100%;
+    touch-action: none;
+}
+.pad.button {
+    margin: auto;
     height: 100px;
     width: 100px;
     top: 0px;
     left: 0px;
     background-size: 100% 100%;
+    touch-action: none;
 }
 
-.knob,.knob-dot {
+.button.active:before{
+    content: "";
+    position: absolute;
+    touch-action: none;
+}
+.pad.outline.active:before{
+    content: "";
+    height: 90px;
+    width: 90px;
+    margin: 5px;
+    border-radius: 6px;
+}
+.radio.outline.active:before{
+    height: 34px;
+    width: 57px;
+    margin: 3px;
+    border-radius: 5px;
+}
+.button.outline.green.active:before{
+    box-shadow: 0px 0px 10px 1px rgba(0,255,0,0.8);
+}
+.button.outline.pink.active:before{
+    box-shadow: 0px 0px 10px 1px  rgba(255,0,144,0.8);
+}
+.button.outline.red.active:before{
+    box-shadow: 0px 0px 10px 1px  rgba(255,0,0,0.8);
+}
+.button.outline.violet.active:before{
+    box-shadow: 0px 0px 10px 1px  rgba(215,0,255,0.8);
+}
+.button.outline.turq.active:before{
+    box-shadow: 0px 0px 10px 1px rgba(0,255,255,0.8);
+}
+.button.outline.blue.active:before{
+    box-shadow: 0px 0px 10px 1px rgba(0,213,255,0.8);
+}
+.button.outline.yellow.active:before{
+    box-shadow: 0px 0px 10px 1px rgba(213,255,0,0.8);
+}
+.button.outline.orange.active:before{
+    box-shadow: 0px 0px 10px 1px  rgba(255,155,0,0.8);
+}
+
+
+.button.active:after {
+    content: "";
+    position: absolute;
+    touch-action: none;
+}
+.pad.active:after {
+    height: 88px;
+    width: 88px;
+    margin: 6px;
+    border-radius: 6px;
+}
+.radio.active:after {
+    height: 36px;
+    width: 59px;
+    margin: 2px;
+    border-radius: 4px;
+}
+.button.fill.green.active:after {
+    box-shadow: inset 0px 0px 10px 2px rgba(0,255,0,0.8);
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,0,0.9) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.pink.active:after {
+    box-shadow: inset 0px 0px 10px 2px rgba(255,0,144,0.8);
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(255,0,144,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.red.active:after {
+    box-shadow: inset 0px 0px 10px 2px rgba(255,0,0,0.8);
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(255,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.violet.active:after {
+    box-shadow: inset 0px 0px 10px 2px rgba(215,0,255,0.8);
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(215,0,255,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.turq.active:after {
+    box-shadow: inset 0px 0px 10px 2px rgba(0,255,255,0.8);
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,255,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.blue.active:after {
+    box-shadow: inset 0px 0px 10px 2px rgba(0,213,255,0.8);
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,103,255,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.yellow.active:after {
+    box-shadow: inset 0px 0px 10px 2px rgba(213,255,0,0.8);
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(213,255,0,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.orange.active:after {
+    box-shadow: inset 0px 0px 10px 2px rgba(255,155,0,0.8);
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(255,155,0,0.8) 0%, rgba(0,0,0,0) 100%);
+}
+
+.knob-got.green:after {
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: 10px 10px;
+    border-radius: 50%;
+    box-shadow: inset 0px 0px 10px 2px rgba(0,255,0,0.8);
+    background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,0,0.9) 0%, rgba(0,0,0,0) 100%);
+}
+
+.knob {
+    margin: auto;
     height: 60px;
     width:60px;
-    margin: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
     background-size: 60px 60px;
     background-repeat: no-repeat;
 }
-
-.radio-button {
-     grid-row-start: 1;
-    height: 35px;
-    width:55px;
-    background-size: 100% 100%;
-    margin-left: 22.5px;
+.knob:before {
+    content: "";
+    position: absolute;
+    touch-action: none;
 }
-
-.knob.r1 {
-     grid-row-start:2;
+.knob:after {
+    content: "";
+    position: absolute;
+    touch-action: none;
+    height: 88px;
+    width: 88px;
 }
-.knob.r2 {
-     grid-row-start: 3;
+.knob,.knob-dot {
+    height: 60px;
+    width:60px;
+    background-size: 60px 60px;
+    background-repeat: no-repeat;
 }
-.knob.r3 {
-     grid-row-start: 4;
-}
-.pad-button {
-     grid-row-start: 5;
-}
-
-
-.knob-dot {
-   background-position: 0px 0px;
-}
-
 .channels {
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 3;
     grid-row-end: 4;
 }
-
 .channel {
     display: grid;
+    justify-items: center;
     grid-template-rows: 40px 80px 80px 80px 100px;
     grid-template-columns: 100%;
 }
-
 .pads {
+    width: 824px;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 3;
@@ -105,8 +203,8 @@ body {
 
 .screen-container {
     display: grid;
-    grid-template-rows: 200px;
-    grid-template-columns: 200px 400px 200px;
+    grid-template-rows: 40px 190px;
+    grid-template-columns: 210px 380px 210px;
     grid-column-start: 2;
     grid-row-start: 2;
 }
@@ -114,5 +212,5 @@ body {
 .screen {
     background-size: 100% 100%;
     grid-column-start: 2;
-    grid-row-start: 1;
+    grid-row-start: 2;
 }

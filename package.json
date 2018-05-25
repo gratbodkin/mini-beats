@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators": "^6.24.1",
     "jquery": "^3.3.1",
     "konva": "^2.0.3",
     "pepjs": "^0.4.3",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-app-rewire-provide-plugin": "^1.0.0",
     "react-app-rewired": "^1.5.2",

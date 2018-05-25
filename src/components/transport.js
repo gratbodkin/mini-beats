@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PadButton from './pad-button';
+import PadButton from './button';
 
 export default class Transport extends Component {
     constructor(props)

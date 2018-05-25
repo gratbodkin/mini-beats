@@ -49,9 +49,9 @@ export default class Knob extends Component
 
     update(inValue = 0)
     {
-        let radVal = this._normValueToRadians(inValue);
-        this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-        this._drawArcs(radVal);
+        // let radVal = this._normValueToRadians(inValue);
+        // this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+        // this._drawArcs(radVal);
     }
 
     _normValueToRadians(inNormValue)
@@ -87,16 +87,12 @@ export default class Knob extends Component
         const bgStyle = {
             backgroundImage: 'url(' + KnobBG + ')'
         };
-        const knobStyle = {
-            backgroundImage: 'url(' + KnobDot + ')'
-        };
+        const classList = "knob " + this.props.color;
         return (
-            <div className="knob" 
+            <div className={classList}
             ref={node => this.el = node}
             style={bgStyle}
-            >
-                <img className="knob-dot" ref={node => this.el = node} src={KnobDot}/>
-            </div>
+            ></div>
         );
         // return (
         //     <div className="knob" 

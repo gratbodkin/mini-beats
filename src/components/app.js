@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import logo from '../assets/logo.svg';
 import '../css/App.css';
-import AudioBufferLoader from "./audio-buffer-loader";
-import Pads from './pads';
-import PadParams from './pad-params';
+import AudioBufferLoader from "../audio-buffer-loader";
+import Controls from './controls';
 import Screen from "./screen";
 import Transport from "./transport";
 import BGImg from "../assets/img/background.png";
@@ -13,23 +12,35 @@ class App extends Component {
     {
         super(props);
         this.clipsReady = false;
-        this.clipTags = [];
-        try 
-        {
-            this._audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            this._audioClipEngine = new AudioBufferLoader(this._audioContext, (inClipTags) => {
-                this.clipTags = inClipTags;
-                this.clipsReady = true;
-            });
-        }
-        catch (err) 
-        {
-            alert("This app doesn't seem to be availible for your browser. Sorry about that. We recommend Firefox or Chrome")
-        }
+        // this._audioClips = {};
+        this._audioContext =  new AudioContext();
+        this._audioClipEngine = new AudioBufferLoader(this._audioContext);
+        this._audioClipEngine.loadClips().then((clips) => {
+             this._audioClips = clips;
+             this.clipsReady = true;
+        });
+        this.state = {tag: ""};
     }
 
-    ctrlChanged = (e) => {
+    clipsLoaded()
+    {
 
+    }
+
+    onChange(e)
+    {
+        if(this.clipsReady)
+        {
+            const type = e.type;
+            if(type === "play")
+            {
+                const tag = Object.keys(this._audioClips)[e.id];
+                this._audioClips[tag].play();
+                this.setState(prevState => ({
+                  tag: tag
+                }));
+            }
+        }
     }
 
     render() 
@@ -37,12 +48,12 @@ class App extends Component {
         const style = {
             backgroundImage: 'url(' + BGImg + ')'
         };
-        const waveform = this.clipsReady ? this._audioClipEngine.getClip("kick1") : null;
+        const clip = this.clipsReady ? this.state.tag : null;
         return (
           <div className="App">
             <div className="panel-bg" style={ style }>
-                <Screen waveform={waveform}></Screen>
-                {this.clipsReady ? <Pads className="pads" clips={this.clipTags} onChange={this.ctrlChanged}></Pads> : null}
+                <Screen clip={this.clipsReady ? this._audioClips[clip] : null}></Screen>
+                <Controls className="pads" onChange={e => this.onChange(e)}></Controls>
             </div>
           </div>
         );
