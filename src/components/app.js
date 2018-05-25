@@ -35,10 +35,11 @@ class App extends Component {
             if(type === "play")
             {
                 const tag = Object.keys(this._audioClips)[e.id];
-                this._audioClips[tag].play();
+                // this._audioClips[tag].play();
                 this.setState(prevState => ({
                   tag: tag
                 }));
+                this.screen.play(this._audioClips[tag], e.color);
             }
         }
     }
@@ -52,8 +53,18 @@ class App extends Component {
         return (
           <div className="App">
             <div className="panel-bg" style={ style }>
-                <Screen clip={this.clipsReady ? this._audioClips[clip] : null}></Screen>
-                <Controls className="pads" onChange={e => this.onChange(e)}></Controls>
+                <div className="panel-top">
+                    <Screen
+                    className="screen" 
+                    context={this._audioContext}
+                    clip={this.clipsReady ? this._audioClips[clip] : null}
+                    ref={node => this.screen = node}
+                    ></Screen>
+                </div>
+                <Controls 
+                className="pads" 
+                onChange={e => this.onChange(e)}
+                ></Controls>
             </div>
           </div>
         );

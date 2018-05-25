@@ -9,6 +9,17 @@ img{
     touch-action: none;
 }
 
+@font-face {
+    font-family: lcd-text;
+    src: url(../assets/fonts/advanced_pixel_lcd-7.ttf);
+}
+
+* {
+    font-family: lcd-text;
+    font-size: 10px;
+    color: rgba(200,200,200,0.6);
+}
+
 body {
     position: absolute;
     overflow: hidden;
@@ -84,7 +95,7 @@ body {
     box-shadow: 0px 0px 10px 1px rgba(0,255,255,0.8);
 }
 .button.outline.blue.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(0,213,255,0.8);
+    box-shadow: 0px 0px 10px 1px rgba(0,103,255,0.8);
 }
 .button.outline.yellow.active:before{
     box-shadow: 0px 0px 10px 1px rgba(213,255,0,0.8);
@@ -92,7 +103,6 @@ body {
 .button.outline.orange.active:before{
     box-shadow: 0px 0px 10px 1px  rgba(255,155,0,0.8);
 }
-
 
 .button.active:after {
     content: "";
@@ -111,6 +121,7 @@ body {
     margin: 2px;
     border-radius: 4px;
 }
+
 .button.fill.green.active:after {
     box-shadow: inset 0px 0px 10px 2px rgba(0,255,0,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,0,0.9) 0%, rgba(0,0,0,0) 100%);
@@ -132,7 +143,7 @@ body {
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,255,0.8) 0%, rgba(0,0,0,0) 100%);
 }
 .button.fill.blue.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(0,213,255,0.8);
+    box-shadow: inset 0px 0px 10px 2px rgba(0,103,255,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,103,255,0.8) 0%, rgba(0,0,0,0) 100%);
 }
 .button.fill.yellow.active:after {
@@ -201,9 +212,9 @@ body {
     grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
 }
 
-.screen-container {
+.panel-top {
     display: grid;
-    grid-template-rows: 40px 190px;
+    grid-template-rows: 45px 185px;
     grid-template-columns: 210px 380px 210px;
     grid-column-start: 2;
     grid-row-start: 2;
@@ -213,4 +224,11 @@ body {
     background-size: 100% 100%;
     grid-column-start: 2;
     grid-row-start: 2;
+    display: grid;
+    grid-template-rows: 50px 85px 50px;
+
+}
+
+.screen > * {
+     align-self: center;
 }

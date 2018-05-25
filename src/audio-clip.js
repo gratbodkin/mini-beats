@@ -30,7 +30,7 @@ export default class AudioClip
 
     getTag()
     {
-
+        return this._tag;
     }
 
     getBuffer()
