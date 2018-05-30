@@ -22,11 +22,6 @@ class App extends Component {
         this.state = {tag: ""};
     }
 
-    clipsLoaded()
-    {
-
-    }
-
     onChange(e)
     {
         if(this.clipsReady)
@@ -54,6 +49,9 @@ class App extends Component {
           <div className="App">
             <div className="panel-bg" style={ style }>
                 <div className="panel-top">
+                    <Transport
+                        onChange={e => this.onChange(e)}
+                    ></Transport>
                     <Screen
                     className="screen" 
                     context={this._audioContext}

@@ -42,7 +42,8 @@ body {
 .hidden {
     display: none;
 }
-.radio.button {
+.radio.button,
+.transport .button {
     margin: auto;
     height: 40px;
     width: 63px;
@@ -116,10 +117,13 @@ body {
     border-radius: 6px;
 }
 .radio.active:after {
-    height: 36px;
-    width: 59px;
-    margin: 2px;
+    height: 34px;
+    width: 57px;
+    margin: 3px;
     border-radius: 4px;
+}
+.radio.fill.active:after {
+    box-shadow: none !important; 
 }
 
 .button.fill.green.active:after {
@@ -165,11 +169,19 @@ body {
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,0,0.9) 0%, rgba(0,0,0,0) 100%);
 }
 
-.knob {
+
+.transport .knob {
+    margin: auto;
+    height: 100px;
+    width:100px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.channel .knob {
     margin: auto;
     height: 60px;
     width:60px;
-    background-size: 60px 60px;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 .knob:before {
@@ -226,6 +238,14 @@ body {
     grid-row-start: 2;
     display: grid;
     grid-template-rows: 50px 85px 50px;
+
+}
+
+.transport {
+
+    grid-column-start: 1;
+    grid-row-start: 2;
+
 
 }
 

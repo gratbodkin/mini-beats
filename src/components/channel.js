@@ -22,7 +22,7 @@ export default class Channel extends Component {
     render() {
         return (
             <div className={this.props.className}>
-                <Button bg={SmBtnBG} color={this.props.color} className="radio outline" onChange={e => this.onChange(e)}></Button>
+                <Button bg={SmBtnBG} color={this.props.color} className="radio fill" onChange={e => this.onChange(e)}></Button>
                 <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
                 <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
                 <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
