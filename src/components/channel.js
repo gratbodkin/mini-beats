@@ -3,7 +3,6 @@ import Knob from './knob';
 import Button from "./button";
 import SmBtnBG from "../assets/img/btn-black-off.png";
 import PadBG from "../assets/img/btn-pad-off.png";
-// import PadOffBtn from "../assets/img/pad-min.png";
 
 export default class Channel extends Component {
     constructor(props)
@@ -22,11 +21,11 @@ export default class Channel extends Component {
     render() {
         return (
             <div className={this.props.className}>
-                <Button bg={SmBtnBG} color={this.props.color} className="radio fill" onChange={e => this.onChange(e)}></Button>
-                <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
-                <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
-                <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
-                <Button bg={PadBG} color={this.props.color} className="pad fill" onChange={e => this.onChange(e)}></Button>
+                <Button bg={SmBtnBG} color={this.props.color} className="radio" onChange={e => this.onChange(e)}></Button>
+                <Knob className="knob outline" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <Knob className="knob outline" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <Knob className="knob outline" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <Button bg={PadBG} color={this.props.color} className="pad" onChange={e => this.onChange(e)}></Button>
             </div>
         );
     }

@@ -49,7 +49,7 @@ export default class Button extends Component {
 
     render() {
         let classList = this.props.className + " button " + this.props.color;
-        classList += this.state.isActive ? " active"  : "";
+        classList += this.state.isActive ? " fill active"  : "";
         return (
             <div 
             className= {classList}

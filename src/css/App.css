@@ -62,99 +62,126 @@ body {
     touch-action: none;
 }
 
-.button.active:before{
+.button:before{
     content: "";
     position: absolute;
     touch-action: none;
 }
-.pad.outline.active:before{
+.pad.outline:before{
     content: "";
     height: 90px;
     width: 90px;
     margin: 5px;
     border-radius: 6px;
 }
-.radio.outline.active:before{
+.radio.outline:before{
     height: 34px;
     width: 57px;
     margin: 3px;
     border-radius: 5px;
 }
-.button.outline.green.active:before{
+.knob.outline:before{
+    height: 34px;
+    width: 57px;
+    margin: 3px;
+    border-radius: 5px;
+}
+.button.outline.green:before{
     box-shadow: 0px 0px 10px 1px rgba(0,255,0,0.8);
 }
-.button.outline.pink.active:before{
+.button.outline.pink:before{
     box-shadow: 0px 0px 10px 1px  rgba(255,0,144,0.8);
 }
-.button.outline.red.active:before{
+.button.outline.red:before{
     box-shadow: 0px 0px 10px 1px  rgba(255,0,0,0.8);
 }
-.button.outline.violet.active:before{
+.button.outline.violet:before{
     box-shadow: 0px 0px 10px 1px  rgba(215,0,255,0.8);
 }
-.button.outline.turq.active:before{
+.button.outline.turq:before{
     box-shadow: 0px 0px 10px 1px rgba(0,255,255,0.8);
 }
-.button.outline.blue.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(0,103,255,0.8);
+.button.outline.blue:before{
+    box-shadow: 0px 0px 10px 1px rgba(0,213,255,0.8);
 }
-.button.outline.yellow.active:before{
+.button.outline.yellow:before{
     box-shadow: 0px 0px 10px 1px rgba(213,255,0,0.8);
 }
-.button.outline.orange.active:before{
+.button.outline.orange:before{
+    box-shadow: 0px 0px 10px 1px  rgba(255,155,0,0.8);
+}
+.knob.outline.green:before{
+    box-shadow: 0px 0px 10px 1px rgba(0,255,0,0.8);
+}
+.knob.outline.pink:before{
+    box-shadow: 0px 0px 10px 1px  rgba(255,0,144,0.8);
+}
+.knob.outline.red:before{
+    box-shadow: 0px 0px 10px 1px  rgba(255,0,0,0.8);
+}
+.knob.outline.violet:before{
+    box-shadow: 0px 0px 10px 1px  rgba(215,0,255,0.8);
+}
+.knob.outline.turq:before{
+    box-shadow: 0px 0px 10px 1px rgba(0,255,255,0.8);
+}
+.knob.outline.blue:before{
+    box-shadow: 0px 0px 10px 1px rgba(0,213,255,0.8);
+}
+.knob.outline.yellow:before{
+    box-shadow: 0px 0px 10px 1px rgba(213,255,0,0.8);
+}
+.knob.outline.orange:before{
     box-shadow: 0px 0px 10px 1px  rgba(255,155,0,0.8);
 }
 
-.button.active:after {
+
+.button:after {
     content: "";
     position: absolute;
     touch-action: none;
 }
-.pad.active:after {
+.pad:after {
     height: 88px;
     width: 88px;
     margin: 6px;
     border-radius: 6px;
 }
-.radio.active:after {
-    height: 34px;
-    width: 57px;
-    margin: 3px;
+.radio:after {
+    height: 32px;
+    width: 55px;
+    margin: 4px;
     border-radius: 4px;
 }
-.radio.fill.active:after {
-    box-shadow: none !important; 
-}
-
-.button.fill.green.active:after {
+.button.fill.green:after {
     box-shadow: inset 0px 0px 10px 2px rgba(0,255,0,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,0,0.9) 0%, rgba(0,0,0,0) 100%);
 }
-.button.fill.pink.active:after {
+.button.fill.pink:after {
     box-shadow: inset 0px 0px 10px 2px rgba(255,0,144,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(255,0,144,0.8) 0%, rgba(0,0,0,0) 100%);
 }
-.button.fill.red.active:after {
+.button.fill.red:after {
     box-shadow: inset 0px 0px 10px 2px rgba(255,0,0,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(255,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
 }
-.button.fill.violet.active:after {
+.button.fill.violet:after {
     box-shadow: inset 0px 0px 10px 2px rgba(215,0,255,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(215,0,255,0.8) 0%, rgba(0,0,0,0) 100%);
 }
-.button.fill.turq.active:after {
+.button.fill.turq:after {
     box-shadow: inset 0px 0px 10px 2px rgba(0,255,255,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,255,0.8) 0%, rgba(0,0,0,0) 100%);
 }
-.button.fill.blue.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(0,103,255,0.8);
+.button.fill.blue:after {
+    box-shadow: inset 0px 0px 10px 2px rgba(0,213,255,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,103,255,0.8) 0%, rgba(0,0,0,0) 100%);
 }
-.button.fill.yellow.active:after {
+.button.fill.yellow:after {
     box-shadow: inset 0px 0px 10px 2px rgba(213,255,0,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(213,255,0,0.8) 0%, rgba(0,0,0,0) 100%);
 }
-.button.fill.orange.active:after {
+.button.fill.orange:after {
     box-shadow: inset 0px 0px 10px 2px rgba(255,155,0,0.8);
     background-image: radial-gradient(ellipse farthest-corner at center, rgba(255,155,0,0.8) 0%, rgba(0,0,0,0) 100%);
 }
