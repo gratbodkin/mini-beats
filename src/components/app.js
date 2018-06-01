@@ -19,6 +19,8 @@ class App extends Component {
              this._audioClips = clips;
              this.clipsReady = true;
         });
+        this._channelMerger = this._audioContext.createChannelMerger(8);
+        this._analyser = this._audioContext.createAnalyser();
         this.state = {tag: ""};
     }
 
@@ -30,13 +32,26 @@ class App extends Component {
             if(type === "play")
             {
                 const tag = Object.keys(this._audioClips)[e.id];
-                // this._audioClips[tag].play();
                 this.setState(prevState => ({
                   tag: tag
                 }));
-                this.screen.play(this._audioClips[tag], e.color);
+                //this.screen.play(this._audioClips[tag], e.color);
+                this._audioClips[tag].play();
             }
         }
+    }
+
+    play()
+    {
+        this._gain = inGain;
+        const gainNode = this._audioContext.createGain();
+        gainNode.gain.value = inGain;
+        const source = this._audioContext.createBufferSource();
+        // this.source.playbackRate.value = inRate;
+        source.buffer = this._buffer;
+        source.connect(gainNode);
+        gainNode.connect(this._audioContext.destination);
+        source.start(0);
     }
 
     render() 

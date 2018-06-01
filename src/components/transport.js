@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Button from './button';
 import Knob from './knob';
-import BG from "../assets/img/btn-black-on.png";
+import BG from "../assets/img/btn-black-off.png";
 import * as mb from "../defs";
 
 export default class Transport extends Component {
