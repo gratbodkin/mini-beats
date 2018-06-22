@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import KnobBG from "../assets/img/knob-matt-bg.png";
-import KnobDot from "../assets/img/knob-dot-blu.png";
 import PEP from "pepjs";
 import $ from "jquery";
 
@@ -87,7 +86,7 @@ export default class Knob extends Component
         const bgStyle = {
             backgroundImage: 'url(' + KnobBG + ')'
         };
-        const classList = "knob " + this.props.color;
+        const classList = "knob " + this.props.className;
         return (
             <div className={classList}
             ref={node => this.el = node}

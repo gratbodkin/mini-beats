@@ -31,7 +31,11 @@ export default class Button extends Component {
         this.setState(prevState => ({
           isActive: true
         }));
-        const evt = {type: "down", key: this.key};
+        const evt = {
+            type: "down", 
+            tag: this.props.tag,
+            action: this.props.action
+        };
         this.props.onChange(evt);
     }
 
@@ -49,13 +53,14 @@ export default class Button extends Component {
 
     render() {
         let classList = this.props.className + " button " + this.props.color;
-        classList += this.state.isActive ? " fill active"  : "";
+        classList += this.state.isActive ? " active"  : "";
+        const btnText = this.props.text ? this.props.text : "";
         return (
             <div 
             className= {classList}
             ref={node => this.el = node}
             style={this.bgStyle}
-            ></div>
+            ><label className="btn-text">{btnText}</label></div>
         );
 
     }

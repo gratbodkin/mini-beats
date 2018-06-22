@@ -13,8 +13,6 @@ export default class Controls extends Component {
 
     onChange(e)
     {
-        const color = channelColors[e.id];
-        e.color = color;
         this.props.onChange(e);
     }
 

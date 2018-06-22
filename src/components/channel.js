@@ -14,18 +14,18 @@ export default class Channel extends Component {
     {
         if(e.type === "down")
         {
-            this.props.onChange({type: "play", id: this.props.tag});
+            this.props.onChange(e);
         }
     }
 
     render() {
         return (
             <div className={this.props.className}>
-                <Button bg={SmBtnBG} color={this.props.color} className="radio" onChange={e => this.onChange(e)}></Button>
-                <Knob className="knob outline" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
-                <Knob className="knob outline" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
-                <Knob className="knob outline" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
-                <Button bg={PadBG} color={this.props.color} className="pad" onChange={e => this.onChange(e)}></Button>
+                <Button bg={SmBtnBG} tag={this.props.tag} color={this.props.color} className="btn-sml fill" action="select" onChange={e => this.onChange(e)}></Button>
+                <Knob className="knob outline" tag={this.props.tag}  color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <Knob className="knob outline" tag={this.props.tag}  color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <Knob className="knob outline" tag={this.props.tag}  color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <Button bg={PadBG} tag={this.props.tag}  color={this.props.color} className="pad fill" action="play" onChange={e => this.onChange(e)}></Button>
             </div>
         );
     }

@@ -18,10 +18,12 @@ export default class Transport extends Component {
     render() {
         return (
             <div className="transport">
-                <Button bg={BG} color={mb.kGreen} className="transport" onChange={e => this.onChange(e)}></Button>
-                <Button bg={BG} color={mb.kGreen} className="transport" onChange={e => this.onChange(e)}></Button>
-                <Button bg={BG} color={mb.kGreen} className="transport" onChange={e => this.onChange(e)}></Button>
-                <Knob className="knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
+                <div className="transport-btns">
+                    <Button bg={BG} color={mb.kGreen} className="btn-sml fill" onChange={e => this.onChange(e)}></Button>
+                    <Button bg={BG} color={mb.kGreen} className="btn-sml fill" onChange={e => this.onChange(e)}></Button>
+                    <Button bg={BG} color={mb.kGreen} className="btn-sml fill" onChange={e => this.onChange(e)}></Button>
+                </div>
+                <Knob className="knob transport-knob" color={this.props.color} onChange={e => this.onChange(e)}></Knob>
             </div>
         );
     }
