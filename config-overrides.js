@@ -18,7 +18,7 @@ module.exports = (config, env) => {
     });
     config.plugins.push(
       rewireProvidePlugin(config, env, {
-  'window.jQuery': 'jquery'
+      'window.jQuery': 'jquery'
   })
     );
     return config;

@@ -1,112 +1,123 @@
 import React, { Component } from 'react';
 import * as mb from "../defs";
+
+import * as THREE from 'three';
 import $ from "jquery";
 
-const RMS = values => Math.sqrt(
-  values.reduce((sum, value) => sum + Math.pow(value, 2), 0) / values.length
-);
-const avg = values => values.reduce((sum, value) => sum + value, 0) / values.length;
-const max = values => values.reduce((max, value) => Math.max(max, value), 0);
-
-export default class Waveform extends Component {
-    constructor(props)
+// export default class Waveform extends Component {
+export default class Waveform{
+    constructor(canvas, aContext)
     {
-        super(props);
+        this.canvas = canvas;
+        this.audioContext = aContext;
+        this.init();
+        this.draw();
     }  
 
-    componentDidMount() 
-    {
-        // this.canvas = document.createElement("canvas");
-        this.context = this.canvas.getContext("2d");
-        // this.canvas.height = this.el.getCalculatedStyle(this.canvas.height;
-        // this.canvas.width = this.el.getCalculatedStyle.this.canvas.width;
-        // this.el.appendChild(this.canvas);
-    }
-
-    componentWillUnmount() 
-    {
-        $(this.el).off("pointerdown");
-    }
-
-    // getWaveformData(audioBuffer, dataPoints) 
+    // componentDidMount() 
     // {
-    //   var bufferLength = 1024
-    //   const leftChannel = audioBuffer.getChannelData(0);
-    //   const rightChannel = audioBuffer.getChannelData(1);
-    //   const values = new Float32Array(dataPoints);
-    //   const dataWindow = Math.round(leftChannel.length / dataPoints);
-    //   for (let i = 0, y = 0, buffer = []; i < leftChannel.length; i++) {
-    //     const summedValue = (Math.abs(leftChannel[i]) + Math.abs(rightChannel[i])) / 2;
-    //     buffer.push(summedValue);
-    //     if (buffer.length === dataWindow) {
-    //       values[y++] = avg(buffer);
-    //       buffer = [];
-    //     }
-    //   }
-    //   return values;
+    //     this.analyser = this.props.analyser;
+    //     this.init();
+    //     this.draw();
     // }
 
-    // draw(inData) {
-    //     const bufferLength = inData.length ;
-    //     //Schedule next redraw
-    //     requestAnimationFrame(() => {this.draw});
+    // componentWillUnmount() 
+    // {
 
-    //     //Draw black background
-    //     this.context.fillStyle = 'rgb(0, 0, 0)';
-    //     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
-    //     //Draw spectrum
-    //     const barWidth = (this.canvas.width / bufferLength) * 2.5;
-    //     let posX = 0;
-    //     for (let i = 0; i < bufferLength; i++) 
-    //     {
-    //         const barHeight = (inData[i] + 140) * 2;
-    //         this.context.fillStyle = 'rgb(' + Math.floor(barHeight + 100) + ', 50, 50)';
-    //         this.context.fillRect(posX, this.canvas.height - barHeight / 2, barWidth, barHeight / 2);
-    //         posX += barWidth + 1;
-    //     }
     // }
 
-    draw(dataArray) {
-      let drawVisual = requestAnimationFrame(this.draw);
-      this.canvas.fillStyle = 'rgb(230, 20, 210)';
-      this.canvas.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.canvas.linethis.canvas.width = 2;
-      this.canvas.strokeStyle = 'rgb(40, 95, 95)';
-      this.canvas.beginPath();
-      
-      var sliceWidth = this.canvas.width * 1.0 / this.props.bufferLength;
-      var x = 0;
-      
-      for(var i = 0; i < this.props.bufferLength; i++) {
-       
-            var v = dataArray[i] / 128.0;
-            var y = v * this.canvas.height/2;
-
-            if(i === 0) {
-              this.canvas.moveTo(x, y);
-            } else {
-              this.canvas.lineTo(x, y);
-            }
-
-            x += sliceWidth;
-          };
-      
-      this.canvas.lineTo(this.canvas.width, this.canvas.height/2);
-          this.canvas.stroke();
+    setBuffer(inSource)
+    {
+        this.buffer = inSource;
+        this.draw();
     }
 
-    render() {
-        if(this.canvas)
-        {
-            this.draw(this.props.freqData);
-        }
-        return (
-            <div className="waveform-container"
-            ref={node => this.el = node}
-            >
-                <canvas ref={node => this.canvas = node}></canvas>
-            </div>
-        );
+    draw() {
+        // update the camera
+        // var rotSpeed = this.control.rotationSpeed;
+        // this.camera.position.x = this.camera.position.x * Math.cos(rotSpeed) + this.camera.position.z * Math.sin(rotSpeed);
+        // this.camera.position.z = this.camera.position.z * Math.cos(rotSpeed) - this.camera.position.x * Math.sin(rotSpeed);
+        // this.camera.lookAt(this.scene.position);
+        // let array =  new Uint8Array(this.analyser.frequencyBinCount);
+        // this.analyser.getByteFrequencyData(array);
+        // // let average = array.map(function(x,i,arr){return x/arr.length}).reduce(function(a,b){return a + b})
+        // // // and render the scene
+        // // this.renderer.render(this.scene, camera);
+        // // render using requestAnimationFrame
+        // requestAnimationFrame(() => {this.draw});
+    }
+
+    componentWillReceiveProps(nextProps)
+    {
+        // this.draw(nextProps.freqData, nextProps.bufferLength);
+        // this.draw();
+    }
+
+    // render() {
+    //     return (
+    //         <div className="waveform-container"
+    //         ref={node => this.el = node}
+    //         >
+    //             <canvas width="400" height="200" ref={node => this.canvas = node}></canvas>
+    //         </div>
+    //     );
+    // }
+
+    init() {
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.renderer = new THREE.WebGLRenderer({canvas: this.canvas});
+        this.renderer.setClearColor(0x000000, 1.0);
+        // this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.shadowMapEnabled = true;
+        // create the ground plane
+        this.planeGeometry = new THREE.PlaneGeometry(80, 80);
+        this.planeMaterial = new THREE.MeshPhongMaterial({color: 0x3333ff});
+        this.plane = new THREE.Mesh(this.planeGeometry, this.planeMaterial);
+        this.plane.receiveShadow = true;
+        // rotate and position the plane
+        this.plane.rotation.x = -0.5 * Math.PI;
+        this.plane.position.x = 0;
+        this.plane.position.y = -2;
+        this.plane.position.z = 0;
+        // add the plane to the scene
+        this.scene.add(this.plane);
+        // create a cube
+        this.cubeGeometry = new THREE.BoxGeometry(3, 6, 3, 15, 25, 15);
+        var pm = new THREE.PointsMaterial();
+        pm.map = THREE.TextureLoader("../assets/textures/particles/particle.png");
+        pm.blending= THREE.AdditiveBlending;
+        pm.transparent = true;
+        pm.size=1.0;
+        var ps = new THREE.ParticleSystem(this.cubeGeometry, pm);
+        ps.sortParticles = true;
+        ps.name='cube';
+        ps.position.x=1.75;
+        this.scene.add(ps);
+        var pm2 = pm.clone();
+        pm2.map = THREE.ImageUtils.loadTexture("../assets/textures/particles/particle2.png");
+        var ps2 = new THREE.ParticleSystem(this.cubeGeometry, pm2);
+        ps2.name = 'cube2';
+        ps2.position.x=-1.75;
+        this.scene.add(ps2);
+        this.camera.position.x = 10;
+        this.camera.position.y = 14;
+        this.camera.position.z = 10;
+        this.camera.lookAt(this.scene.position);
+        // add spotlight for the shadows
+        var spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position.set(10, 20, 20);
+        spotLight.shadowCameraNear = 20;
+        spotLight.shadowCameraFar = 50;
+        spotLight.castShadow = true;
+        this.scene.add(spotLight);
+        // setup the control object for the control gui
+        this.control = new function() {
+            this.rotationSpeed = 0.005;
+            this.opacity = 0.6;
+//            this.color = cubeMaterial.color.getHex();
+        };
     }
 }
+

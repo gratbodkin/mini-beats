@@ -6,21 +6,12 @@ export default class Screen extends Component {
     constructor(props)
     {
         super(props);
-        this.state = {tag: ""};
+        // this.state = {freqData: null};
     }
 
     componentDidMount() 
     {   
-        this.wavesurfer = WaveSurfer.create({
-          container: this.waveformEl,
-          waveColor: "#aaaaaa",
-          progressColor: "#888888",
-          height: "75"
-        });
-         
-        this.wavesurfer.on('ready', (e) => {
-            this.wavesurfer.params.container.style.opacity = 0.9;
-        });
+        this._waveform = new Waveform(this.canvas, this.props.audioContext);
     }
 
     componentWillUnmount() 
@@ -28,18 +19,17 @@ export default class Screen extends Component {
 
     }  
 
+    setBuffer(inData)
+    {
+        this._waveform.setBuffer(inData);
+    }
+
     render() {
         return (
-                <div className="screen" 
-                ref={node => this.el = node}
-                >
-                    <div className="sample-info-display">
-                        {this.state.tag}
-                    </div>
-                    <Waveform freqData={this.props.freqData} bufferLength={this.props.bufferLength}></Waveform>
-                    <div className="waveform-display" ref={node => this.waveformEl = node}></div>
-                    <div className="fn-info-display">
-                    </div>
+                <div className="screen" ref={node => this.containerEl = node}>
+                    <div className="sample-info-display"></div>
+                    <canvas width="397" height="194" ref={node => this.canvas = node}></canvas>
+                    <div className="fn-info-display"></div>
                 </div> 
         );
     }

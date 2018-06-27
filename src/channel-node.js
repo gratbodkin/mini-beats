@@ -5,7 +5,6 @@ export default class ChannelNode{
     {
         this._audioContext = inContext;
         this.gain = this._audioContext.createGain();
-        this.analyser = this._audioContext.createAnalyser();
         this.compressor = this._audioContext.createDynamicsCompressor();
         this.distortion = this._audioContext.createWaveShaper();
         this.biquadFilter = this._audioContext.createBiquadFilter();
@@ -19,14 +18,19 @@ export default class ChannelNode{
         // this.distortion.connect(this.convolver);
         // this.convolver.connect(this.gain);
 
-        this.analyser.fftSize = 2048;
-        this.bufferLength = this.analyser.frequencyBinCount; 
-        this.dataBuff = new Uint8Array(this.bufferLength);
-        this.dataArray = new Float32Array(this.bufferLength);
-        this._curClip = {};
+        // this.analyser.fftSize = 2048;
+        // this.bufferLength = this.analyser.frequencyBinCount; 
+        // this.dataBuff = new Uint8Array(this.bufferLength);
+        // this.dataArray = new Float32Array(this.bufferLength);
+        this._mClip = {};
     }  
 
     getGain()
+    {
+       return this.gain; 
+    }
+
+    setGain()
     {
        return this.gain; 
     }
@@ -36,34 +40,20 @@ export default class ChannelNode{
        return this.source; 
     }
 
-    setBuffer(inBuffer)
-    {
-        this.buffer = inBuffer;
-    }
-
     setClip(inClip)
     {
-        this._curClip = inClip;
-        if(this._curClip._buffer)
-        {
-            this.setBuffer(this._curClip._buffer);
-        }
+        // if(inClip.getBuffer())
+        // {
+        //     this._mClip = inClip;
+        // }
+        this._mClip = inClip;
     }
 
     play(inDest) 
     {
-        if(this.buffer)
+        if(this._mClip)
         {
-            this.source = this._audioContext.createBufferSource();
-            this.source.buffer = this.buffer;
-            this.source.connect(this.gain);
-            // this.source.connect(this.biquadFilter);
-            // this.biquadFilter.connect(this.analyser);
-            // this.analyser.connect(this.compressor);
-            // this.compressor.connect(this.distortion);
-            // this.distortion.connect(this.convolver);
-            // this.convolver.connect(this.gain);
-            this.source.start(0);
+            this._mClip.play(this.gain, 1.0)
         }
     }
 }

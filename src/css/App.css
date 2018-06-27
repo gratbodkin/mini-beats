@@ -15,7 +15,6 @@
 }
 
 *{
-/*    font-family: lcd-text;*/
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 10px;
     color: rgba(200,200,200,0.6);
@@ -88,53 +87,135 @@ body {
     margin: 3px;
     border-radius: 5px;
 }
+* {
+    --mb-green: rgba(0,255,0,0.8);
+    --mb-pink: rgba(255,0,144,0.8);
+    --mb-red: rgba(255,0,0,0.8);
+    --mb-violet: rgba(215,0,255,0.8);
+    --mb-blue: rgba(0,213,255,0.8);
+    --mb-turq: rgba(0,255,255,0.8);
+    --mb-yellow: rgba(213,255,0,0.8);
+    --mb-orange: rgba(255,155,0,0.8);
+    --mb-lghtgreen: rgba(0,255,0,0.25);
+    --mb-lghtpink: rgba(255,0,144,0.25);
+    --mb-lghtred: rgba(255,0,0,0.25);
+    --mb-lghtviolet: rgba(215,0,255,0.25);
+    --mb-lghtblue: rgba(0,213,255,0.25);
+    --mb-lghtturq: rgba(0,255,255,0.25);
+    --mb-lghtyellow: rgba(213,255,0,0.25);
+    --mb-lghtorange: rgba(255,155,0,0.25);
+}
 .button.outline.green.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(0,255,0,0.8);
+    box-shadow: 0px 0px 10px 1px var(--mb-green);
 }
 .button.outline.pink.active:before{
-    box-shadow: 0px 0px 10px 1px  rgba(255,0,144,0.8);
+    box-shadow: 0px 0px 10px 1px  var(--mb-pink);
 }
 .button.outline.red.active:before{
-    box-shadow: 0px 0px 10px 1px  rgba(255,0,0,0.8);
+    box-shadow: 0px 0px 10px 1px  var(--mb-red);
 }
 .button.outline.violet.active:before{
-    box-shadow: 0px 0px 10px 1px  rgba(215,0,255,0.8);
+    box-shadow: 0px 0px 10px 1px  var(--mb-violet);
 }
 .button.outline.turq.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(0,255,255,0.8);
+    box-shadow: 0px 0px 10px 1px var(--mb-turq);
 }
 .button.outline.blue.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(0,213,255,0.8);
+    box-shadow: 0px 0px 10px 1px var(--mb-blue);
 }
 .button.outline.yellow.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(213,255,0,0.8);
+    box-shadow: 0px 0px 10px 1px var(--mb-yellow);
 }
 .button.outline.orange.active:before{
-    box-shadow: 0px 0px 10px 1px  rgba(255,155,0,0.8);
+    box-shadow: 0px 0px 10px 1px  var(--mb-orange);
+}
+.button.fill.green.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-green);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-green) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.pink.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-pink);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-pink) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.red.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-red);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-red) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.violet.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-violet);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-violet) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.turq.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-turq);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-turq) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.blue.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-blue);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-blue) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.yellow.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-yellow);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-yellow) 0%, rgba(0,0,0,0) 100%);
+}
+.button.fill.orange.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-orange);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-orange) 0%, rgba(0,0,0,0) 100%);
+}
+.button.btn-sml.fill.green.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-green);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-lghtgreen) 0%, rgba(0,0,0,0) 100%);
+}
+.button.btn-sml.fill.pink.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-pink);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-lghtpink) 0%, rgba(0,0,0,0) 100%);
+}
+.button.btn-sml.fill.red.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-red);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-lghtred) 0%, rgba(0,0,0,0) 100%);
+}
+.button.btn-sml.fill.violet.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-violet);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-lghtviolet) 0%, rgba(0,0,0,0) 100%);
+}
+.button.btn-sml.fill.turq.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-turq);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-lghtturq) 0%, rgba(0,0,0,0) 100%);
+}
+.button.btn-sml.fill.blue.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-blue);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-lghtblue) 0%, rgba(0,0,0,0) 100%);
+}
+.button.btn-sml.fill.yellow.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-yellow);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-lghtyellow) 0%, rgba(0,0,0,0) 100%);
+}
+.button.btn-sml.fill.orange.active:after {
+    box-shadow: inset 0px 0px 10px 2px var(--mb-orange);
+    background-image: radial-gradient(ellipse farthest-corner at center, var(--mb-lghtorange) 0%, rgba(0,0,0,0) 100%);
 }
 .knob.outline.green.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(0,255,0,0.8);
+    box-shadow: 0px 0px 10px 1px var(--mb-green);
 }
 .knob.outline.pink.active:before{
-    box-shadow: 0px 0px 10px 1px  rgba(255,0,144,0.8);
+    box-shadow: 0px 0px 10px 1px  var(--mb-pink);
 }
 .knob.outline.red.active:before{
-    box-shadow: 0px 0px 10px 1px  rgba(255,0,0,0.8);
+    box-shadow: 0px 0px 10px 1px  var(--mb-red);
 }
 .knob.outline.violet.active:before{
-    box-shadow: 0px 0px 10px 1px  rgba(215,0,255,0.8);
+    box-shadow: 0px 0px 10px 1px  var(--mb-violet);
 }
 .knob.outline.turq.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(0,255,255,0.8);
+    box-shadow: 0px 0px 10px 1px  var(--mb-turq);
 }
 .knob.outline.blue.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(0,213,255,0.8);
+    box-shadow: 0px 0px 10px 1px var(--mb-blue);
 }
 .knob.outline.yellow.active:before{
-    box-shadow: 0px 0px 10px 1px rgba(213,255,0,0.8);
+    box-shadow: 0px 0px 10px 1px var(--mb-yellow);
 }
 .knob.outline.orange.active:before{
-    box-shadow: 0px 0px 10px 1px  rgba(255,155,0,0.8);
+    box-shadow: 0px 0px 10px 1px  var(--mb-orange);
 }
 
 .button {
@@ -163,38 +244,7 @@ body {
     margin: 4px;
     border-radius: 4px;
 }
-.button.fill.green.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(0,255,0,0.8);
-    background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,0,0.9) 0%, rgba(0,0,0,0) 100%);
-}
-.button.fill.pink.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(255,0,144,0.8);
-    background-image: radial-gradient(ellipse farthest-corner at center, rgba(255,0,144,0.8) 0%, rgba(0,0,0,0) 100%);
-}
-.button.fill.red.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(255,0,0,0.8);
-    background-image: radial-gradient(ellipse farthest-corner at center, rgba(255,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-}
-.button.fill.violet.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(215,0,255,0.8);
-    background-image: radial-gradient(ellipse farthest-corner at center, rgba(215,0,255,0.8) 0%, rgba(0,0,0,0) 100%);
-}
-.button.fill.turq.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(0,255,255,0.8);
-    background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,255,255,0.8) 0%, rgba(0,0,0,0) 100%);
-}
-.button.fill.blue.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(0,213,255,0.8);
-    background-image: radial-gradient(ellipse farthest-corner at center, rgba(0,103,255,0.8) 0%, rgba(0,0,0,0) 100%);
-}
-.button.fill.yellow.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(213,255,0,0.8);
-    background-image: radial-gradient(ellipse farthest-corner at center, rgba(213,255,0,0.8) 0%, rgba(0,0,0,0) 100%);
-}
-.button.fill.orange.active:after {
-    box-shadow: inset 0px 0px 10px 2px rgba(255,155,0,0.8);
-    background-image: radial-gradient(ellipse farthest-corner at center, rgba(255,155,0,0.8) 0%, rgba(0,0,0,0) 100%);
-}
+
 
 .knob-got.green:after {
     width: 60px;
