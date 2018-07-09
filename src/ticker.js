@@ -7,9 +7,9 @@ class Ticker {
         this.tempo = 100;
     }
 
-    setTempo()
+    setTempo(inTempo)
     {
-
+        this.tempo = inTempo;
     }
 
 
@@ -20,7 +20,7 @@ class Ticker {
 
     getTempo()
     {
-
+        return this.tempo;
     }
 
     fullNote()

@@ -28,9 +28,6 @@ class App extends Component {
         this._analyser.smoothingTimeConstant = 0.4;
         this._analyser.fftSize = 1024;
         this._bufferLength = this._analyser.frequencyBinCount;
-        // this._freqDataArray = new Float32Array(this._bufferLength);
-        // this._timeDataArray = new Float32Array(this._bufferLength);
-        //Import audio clips
         this._audioClipEngine = new AudioBufferLoader(this._audioContext);
         this._audioClipEngine.loadClips().then((clips) => {
         this._audioClips = clips;
@@ -59,9 +56,8 @@ class App extends Component {
             const action = e.action;
             if(action === "play")
             {
-                this._channels[e.tag].play();
-                // this._screen.setBuffer(this._channels[e.tag].getBuffer().getChannelData(0));
-                // this._analyser.getFloatFrequencyData(this._freqDataArray);
+                const clip = this._channels[e.tag].getClip();
+                this._screen.setClip(clip);
                 this.setState(prevState => ({
                   tag: e.tag
                 }));

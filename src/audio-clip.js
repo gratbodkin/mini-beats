@@ -1,7 +1,7 @@
 import SpectrogramPlugin from 'wavesurfer.js/src/plugin/spectrogram.js'
 
 const SPECTROGRAM_RESOLUTION = 512;
-const FFT_SAMPLE_RATE = 512;
+const FFT_SAMPLE_RATE = 1024;
 const FFT_BUFFER_SIZE = 128;
 
 export default class AudioClip
@@ -11,6 +11,7 @@ export default class AudioClip
         this._audioContext = inContext;
         this._buffer = inBuffer;
         this._tag = inTag;
+        this.spectrogramData = new Map();
         this.createSpectrogramData(inBuffer);
     }
 
@@ -23,6 +24,11 @@ export default class AudioClip
         source.start(0);
     }
 
+    getClipData()
+    {
+        return this.spectrogramData;
+    }
+
     stop()
     {
 
@@ -30,23 +36,47 @@ export default class AudioClip
 
     createSpectrogramData(inBuffer)
     {
-        const source = this._audioContext.createBufferSource();
-        source.playbackRate.value = 1.0;
-        source.buffer = inBuffer;
-        const analyser = this._audioContext.createAnalyser();
-        const gain = this._audioContext.createGain();
-        gain.gain.value = 0;
-        this.spectrogramData = new Map();
-        const scriptNode = this._audioContext.createScriptProcessor(FFT_SAMPLE_RATE, 1, 1);
-        analyser.smoothingTimeConstant = 0.0;
-        analyser.fftSize = 2048;
-        this.startTime = this._audioContext.currentTime;
-        const bufferData = source.buffer.getChannelData(0);
+        this.spectrogramData.set("freqData", this.getFreqDomainPeaks() );
+        this.spectrogramData.set("timeData", this.getTimeDomainPeaks() );
+    }
+
+    getFreqDomainPeaks(inBuffer = this._buffer, inWindowSize = SPECTROGRAM_RESOLUTION)
+    {
+        const bufferData = inBuffer.getChannelData(0);
         const sampleSize = bufferData.length / SPECTROGRAM_RESOLUTION;
         const sampleStep = ~~(sampleSize / 10) || 1;
+        const freqs = [];
+        const fft = new FFT(SPECTROGRAM_RESOLUTION, inBuffer.sampleRate);
+        const freqBufferData = inBuffer.getChannelData(0);
+        freqBufferData.reduce((res, item, index) => { 
+            const chunkIndex = Math.floor(index/SPECTROGRAM_RESOLUTION)
+            if(!res[chunkIndex]) 
+            {
+                res[chunkIndex] = [] 
+            }
+            res[chunkIndex].push(item);
+            return res
+        }, []).forEach( (fftBufferWindow, index) => {
+            if(fftBufferWindow.length === SPECTROGRAM_RESOLUTION)
+            {
+                const spectrum = fft.calculateSpectrum(fftBufferWindow);
+                const array = new Uint8Array(SPECTROGRAM_RESOLUTION / 2);
+                let j;
+                for (j = 0; j < SPECTROGRAM_RESOLUTION / 2; j++) {
+                    array[j] = Math.max(-255, Math.log10(spectrum[j]) * 45);
+                }
+                freqs.push(array);
+            }
+        });
+        return freqs;
+    }
+
+    getTimeDomainPeaks(inBuffer = this._buffer, inSampleSize = SPECTROGRAM_RESOLUTION)
+    {
         const peaks = [];
-        const timeDomainData = bufferData.reduce((res, item, index) => { 
-            const chunkIndex = Math.floor(index/sampleSize)
+        const bufferData = inBuffer.getChannelData(0);
+        bufferData.reduce((res, item, index) => { 
+            const chunkIndex = Math.floor(index/(inSampleSize / 2))
             if(!res[chunkIndex]) 
             {
                 res[chunkIndex] = [] // start a new chunk
@@ -57,31 +87,7 @@ export default class AudioClip
             peaks[2 * index] = Math.max(...sampleChunk) ;
             peaks[2 * index + 1] = Math.min(...sampleChunk) ;
         });
-        const freqs = [];
-        const fft = new FFT(FFT_BUFFER_SIZE, inBuffer.sampleRate);
-        const freqBufferData = source.buffer.getChannelData(0);
-        const freqDomainData = freqBufferData.reduce((res, item, index) => { 
-            const chunkIndex = Math.floor(index/FFT_BUFFER_SIZE)
-            if(!res[chunkIndex]) 
-            {
-                res[chunkIndex] = [] 
-            }
-            res[chunkIndex].push(item);
-            return res
-        }, []).forEach( (fftBufferWindow, index) => {
-            if(fftBufferWindow.length === FFT_BUFFER_SIZE)
-            {
-                const spectrum = fft.calculateSpectrum(fftBufferWindow);
-                const array = new Uint8Array(FFT_BUFFER_SIZE / 2);
-                let j;
-                for (j = 0; j < FFT_BUFFER_SIZE / 2; j++) {
-                    array[j] = Math.max(-255, Math.log10(spectrum[j]) * 45);
-                }
-                freqs.push(array);
-            }
-        });
-        this.spectrogramData.set("freqData", freqs );
-        this.spectrogramData.set("timeData", peaks );
+        return peaks;
     }
 
     getBinFrequency(index, inTotalBins, inSampleRate) 

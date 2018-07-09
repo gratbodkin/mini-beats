@@ -11,40 +11,25 @@ export default class Waveform{
         this.canvas = canvas;
         this.audioContext = aContext;
         this.init();
-        this.draw();
     }  
 
-    // componentDidMount() 
-    // {
-    //     this.analyser = this.props.analyser;
-    //     this.init();
-    //     this.draw();
-    // }
-
-    // componentWillUnmount() 
-    // {
-
-    // }
-
-    setBuffer(inSource)
+    setClip(inClip)
     {
-        this.buffer = inSource;
+        const data = inClip.getSpectrogramData();
         this.draw();
     }
 
     draw() {
         // update the camera
-        // var rotSpeed = this.control.rotationSpeed;
-        // this.camera.position.x = this.camera.position.x * Math.cos(rotSpeed) + this.camera.position.z * Math.sin(rotSpeed);
-        // this.camera.position.z = this.camera.position.z * Math.cos(rotSpeed) - this.camera.position.x * Math.sin(rotSpeed);
-        // this.camera.lookAt(this.scene.position);
-        // let array =  new Uint8Array(this.analyser.frequencyBinCount);
-        // this.analyser.getByteFrequencyData(array);
-        // // let average = array.map(function(x,i,arr){return x/arr.length}).reduce(function(a,b){return a + b})
-        // // // and render the scene
-        // // this.renderer.render(this.scene, camera);
-        // // render using requestAnimationFrame
-        // requestAnimationFrame(() => {this.draw});
+        var rotSpeed = this.control.rotationSpeed;
+        this.camera.position.x = this.camera.position.x * Math.cos(rotSpeed) + this.camera.position.z * Math.sin(rotSpeed);
+        this.camera.position.z = this.camera.position.z * Math.cos(rotSpeed) - this.camera.position.x * Math.sin(rotSpeed);
+        this.camera.lookAt(this.scene.position);
+        // let average = array.map(function(x,i,arr){return x/arr.length}).reduce(function(a,b){return a + b})
+        // // and render the scene
+        // this.renderer.render(this.scene, camera);
+        // render using requestAnimationFrame
+        requestAnimationFrame(() => {this.draw});
     }
 
     componentWillReceiveProps(nextProps)

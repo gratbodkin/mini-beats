@@ -12,6 +12,7 @@ export default class Screen extends Component {
     componentDidMount() 
     {   
         this._waveform = new Waveform(this.canvas, this.props.audioContext);
+        this.context = this.canvas.getContext("2d");
     }
 
     componentWillUnmount() 
@@ -19,10 +20,13 @@ export default class Screen extends Component {
 
     }  
 
-    setBuffer(inData)
+    setClip(inClip)
     {
-        this._waveform.setBuffer(inData);
+        this._waveform.setClip(inClip);
     }
+
+    getHeight(){ return this.canvas.height;}
+    getWidth(){ return this.canvas.width;}
 
     render() {
         return (

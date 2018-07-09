@@ -1,5 +1,5 @@
 import Waveform from "./components/waveform";
-
+export function test(){return "assets";}
 export default class ChannelNode{
     constructor(inContext)
     {
@@ -30,22 +30,13 @@ export default class ChannelNode{
        return this.gain; 
     }
 
-    setGain()
+    setGain(inGain)
     {
-       return this.gain; 
-    }
-
-    getSource()
-    {
-       return this.source; 
+        this.gain = inGain; 
     }
 
     setClip(inClip)
     {
-        // if(inClip.getBuffer())
-        // {
-        //     this._mClip = inClip;
-        // }
         this._mClip = inClip;
     }
 
@@ -55,5 +46,10 @@ export default class ChannelNode{
         {
             this._mClip.play(this.gain, 1.0)
         }
+    }
+
+    getClip()
+    {
+        return this._mClip;
     }
 }
