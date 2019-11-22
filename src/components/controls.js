@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Channel from "./channel";
 import * as mb from "../defs";
 
+const buttonColors = [mb.kOrange, mb.kViolet];
 const channelColors = [mb.kRed, mb.kOrange, mb.kYellow, mb.kGreen, mb.kTurq, mb.kBlue, mb.kViolet, mb.kPink];
 
 export default class Controls extends Component {
@@ -19,8 +20,8 @@ export default class Controls extends Component {
     render() {
         return (
             <div className={this.props.className}>
-                {channelColors.map((el, index)=>{
-                    return <Channel className="channel" color={el} key={index} onChange={e => this.onChange(e)} tag={index}></Channel>
+            {buttonColors.map((el, index)=>{
+                    return <Channel className="channel" deck={index} color={el} key={index} onChange={e => this.onChange(e)} tag={index}></Channel>
                 })}
             </div>
         );

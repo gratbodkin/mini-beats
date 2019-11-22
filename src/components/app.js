@@ -7,7 +7,7 @@ import Controls from './controls';
 import Screen from "./screen";
 import Transport from "./transport";
 import MenuControls from "./menu-controls";
-import BGImg from "../assets/img/background.png";
+import BGImg from "../assets/img/bg-new3.png";
 
 const numChannels = 8;
 
@@ -15,37 +15,43 @@ class App extends Component {
     constructor(props)
     {
         super(props);
-        this.state = {tag: ""};
+        this.state = {deck1: "", deck2: ""};
         this.clipsReady = false;
         this._audioClips = {};
         this._channels = [];
         //Create audio graph components
-        this._audioContext =  new AudioContext();
-        this._masterGain = this._audioContext.createGain();
-        this._channelMerger = this._audioContext.createChannelMerger(8);
-        this._analyser = this._audioContext.createAnalyser();
-        this._compressor = this._audioContext.createDynamicsCompressor();
+        this.audioContext =  new AudioContext();
+        this._masterGain = this.audioContext.createGain();
+        this._channelMerger = this.audioContext.createChannelMerger(8);
+        this._analyser = this.audioContext.createAnalyser();
+        this._compressor = this.audioContext.createDynamicsCompressor();
         this._analyser.smoothingTimeConstant = 0.4;
         this._analyser.fftSize = 1024;
         this._bufferLength = this._analyser.frequencyBinCount;
-        this._audioClipEngine = new AudioBufferLoader(this._audioContext);
+        this._audioClipEngine = new AudioBufferLoader(this.audioContext);
         this._audioClipEngine.loadClips().then((clips) => {
-        this._audioClips = clips;
-        this.clipsReady = true;
-        const keys = Object.keys(this._audioClips);
-        //Connect audio graph components
-        for(let i = 0; i < 8; i++)
-        {
-            this._channels[i] = new ChannelNode(this._audioContext);
-            this._channels[i].getGain().connect(this._channelMerger);
-            this._channels[i].setClip(this._audioClips[keys[i]]);
-        }
+            this._audioClips = clips;
+            const keys = Object.keys(this._audioClips);
+            this._channels[0] = new ChannelNode(this.audioContext);
+            this._channels[0].getGain().connect(this._channelMerger);
+            this._channels[0].setClip(this._audioClips["loop1"]);
 
-        this._channelMerger.connect(this._analyser);
-        this._analyser.connect(this._compressor);
-        this._compressor.connect(this._masterGain);
-        this._masterGain.connect(this._audioContext.destination);
+            this._channels[1] = new ChannelNode(this.audioContext);
+            this._channels[1].getGain().connect(this._channelMerger);
+            this._channels[1].setClip(this._audioClips["loop2"]);
+            //Connect audio graph components
+            // for(let i = 1; i < 8; i++)
+            // {
+            //     this._channels[i] = new ChannelNode(this.audioContext);
+            //     this._channels[i].getGain().connect(this._channelMerger);
+            //     this._channels[i].setClip(this._audioClips[keys[i]]);
+            // }
 
+            this._channelMerger.connect(this._analyser);
+            this._analyser.connect(this._compressor);
+            this._compressor.connect(this._masterGain);
+            this._masterGain.connect(this.audioContext.destination);
+            this.clipsReady = true;
         });
     }
 
@@ -54,14 +60,30 @@ class App extends Component {
         if(this.clipsReady)
         {
             const action = e.action;
+            let cmdObj = {};
             if(action === "play")
             {
-                const clip = this._channels[e.tag].getClip();
-                this._screen.setClip(clip);
-                this.setState(prevState => ({
-                  tag: e.tag
-                }));
+                let clip = this._channels[e.tag].getClip();
+                cmdObj = {clip: clip, deck: e.deck, action :action};
+                if(clip.isPlaying())
+                {
+                    cmdObj.action = "pause";
+                    clip.pause(this.audioContext.currentTime);
+                }
+                else
+                {
+                    // this.setState(prevState => ({
+                    //   deck1: e.tag
+                    // }));
+                    clip.play(this._channels[e.deck].getGain(), 1.0);
+                }
             }
+            if(action === "stop")
+            {
+                let clip = this._channels[e.tag].getClip();
+                clip.stop(this.audioContext.destination);
+            }
+            this._screen.setCmd(cmdObj);
         }
     }
 
@@ -75,21 +97,14 @@ class App extends Component {
           <div className="App">
             <div className="panel-bg" style={ style }>
                 <div className="panel-top">
-                    <Transport
-                        ref={node => this._transport = node}
-                        onChange={e => this.onChange(e)}
-                    ></Transport>
                     <Screen
                     ref={node => this._screen = node}
                     className="screen"
-                    audioContext={this._audioContext}
+                    audioContext={this.audioContext}
                     ></Screen>
-                    <MenuControls
-                        onChange={e => this.onChange(e)}
-                    ></MenuControls>
                 </div>
                 <Controls 
-                className="pads" 
+                className="controls"
                 onChange={e => this.onChange(e)}
                 ></Controls>
             </div>

@@ -3,11 +3,12 @@ import {Files} from "./audio-importer";
 
 export default class AudioBufferLoader
 {
-	constructor(inContext)
+	constructor(inContext, inChunkSize)
 	{
 		try 
 		{
 			this._audioContext = inContext;
+			this.chunkSize = inChunkSize;
 			this.masterGain = 1.0;
 		}
 		catch (err) 
@@ -30,22 +31,13 @@ export default class AudioBufferLoader
 		});
 	}
 
-	// loadClips(inMap = Files) 
-	// {
-	// 	let clips = {};
-	// 	const inMapArray = [...inMap.entries()].map(async ([key, value]) => {
-	// 	 	clips[key] = await this.loadAndCreateClip(key, value, this._audioContext);
-	// 	});
-	// 	return Promise.all(inMapArray).then(() => { return clips; });
-	// }
-
 	loadAndCreateClip(tag, name, inContext) 
 	{
 		return this.getFile(name).then((r) => {
 			return inContext.decodeAudioData(r)
 		})
 		.then((audio) => {
-			const clip = new AudioClip(inContext, audio, tag);
+			const clip = new AudioClip(inContext, audio, tag, this.chunkSize);
 			return clip;
 		})
 		.catch((err) => {

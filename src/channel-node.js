@@ -5,10 +5,10 @@ export default class ChannelNode{
     {
         this._audioContext = inContext;
         this.gain = this._audioContext.createGain();
-        this.compressor = this._audioContext.createDynamicsCompressor();
-        this.distortion = this._audioContext.createWaveShaper();
-        this.biquadFilter = this._audioContext.createBiquadFilter();
-        this.convolver = this._audioContext.createConvolver();
+        // this.compressor = this._audioContext.createDynamicsCompressor();
+        // this.distortion = this._audioContext.createWaveShaper();
+        // this.biquadFilter = this._audioContext.createBiquadFilter();
+        // this.convolver = this._audioContext.createConvolver();
 
         // this.source = this._audioContext.createBufferSource();
         // this.source.connect(this.biquadFilter);

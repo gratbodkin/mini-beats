@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import WaveSurfer from "wavesurfer.js";
 import Waveform from "./waveform";
+// import Waveform from "./waveform2";
 
 export default class Screen extends Component {
     constructor(props)
     {
         super(props);
-        // this.state = {freqData: null};
     }
 
     componentDidMount() 
     {   
-        this._waveform = new Waveform(this.canvas, this.props.audioContext);
-        this.context = this.canvas.getContext("2d");
+        this.decks = {
+            0: new Waveform(this.canvasA, this.props.audioContext),
+            1: new Waveform(this.canvasB, this.props.audioContext),
+        }
     }
 
     componentWillUnmount() 
@@ -20,9 +22,13 @@ export default class Screen extends Component {
 
     }  
 
-    setClip(inClip)
+    setCmd(inObj)
     {
-        this._waveform.setClip(inClip);
+        if(inObj.deck in this.decks)
+        {
+            this.decks[inObj.deck].setClip(inObj);
+        }
+
     }
 
     getHeight(){ return this.canvas.height;}
@@ -31,9 +37,8 @@ export default class Screen extends Component {
     render() {
         return (
                 <div className="screen" ref={node => this.containerEl = node}>
-                    <div className="sample-info-display"></div>
-                    <canvas width="397" height="194" ref={node => this.canvas = node}></canvas>
-                    <div className="fn-info-display"></div>
+                    <canvas width="874" height="190" ref={node => this.canvasA = node}></canvas>
+                     <canvas width="874" height="190" ref={node => this.canvasB = node}></canvas>
                 </div> 
         );
     }

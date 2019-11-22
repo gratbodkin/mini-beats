@@ -31,8 +31,8 @@ body {
     left: 0px;
     top: 0px;
     display: grid;
-    grid-template-rows: 30px 280px 398px 60px;
-    grid-template-columns: 90px 844px 90px;
+    grid-template-rows: 70px 315px 300px 60px;
+    grid-template-columns: 70px 874px 75px;
     justify-items: center;
     height: 768px;
     width: 1024px;
@@ -43,7 +43,6 @@ body {
     display: none;
 }
 .btn-sml.button,
-.transport .button,
 .menu .button  {
     margin: auto;
     height: 40px;
@@ -62,7 +61,15 @@ body {
     background-size: 100% 100%;
     touch-action: none;
 }
-
+.transport.button {
+    margin: auto;
+    height: 100px;
+    width: 100px;
+    top: 0px;
+    left: 0px;
+    background-size: 100% 100%;
+    touch-action: none;
+}
 .button:before{
     content: "";
     position: absolute;
@@ -271,6 +278,7 @@ body {
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
+
 .knob:before {
     content: "";
     position: absolute;
@@ -296,10 +304,33 @@ body {
     grid-row-end: 4;
 }
 .channel {
+    margin: 10%;
     display: grid;
+    height: 80%;
     place-content: center;
-    grid-template-rows: 40px 80px 80px 80px 100px;
-    grid-template-columns: 100%;
+    grid-template-rows: 20% 30% 50%;
+    grid-template-columns: auto;
+    grid-template:  "chan-knobs"
+                    "chan-sml-btns"
+                    "chan-big-btns";
+}
+.chan-section {
+    justify-self: stretch;
+    margin: auto;
+}
+.chan-knob{ margin: auto;  }
+.chan-knob-inner{   }
+.chan-knobs{ grid-area: chan-knobs;}
+.chan-sml-btns{ grid-area: chan-sml-btns;}
+.chan-big-btns{ grid-area:chan-big-btns;}
+.controls {
+    width: 824px;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
 }
 .pads {
     width: 824px;
@@ -315,18 +346,14 @@ body {
     display: grid;
     width: 100%;
     grid-column-gap: 16px;
-    grid-template-rows: 39px 194px;
-    grid-template-columns: 210px 397px 210px;
+    grid-template-rows: 100%;
+    grid-template-columns:100%;
     grid-column-start: 2;
     grid-row-start: 2;
 }
 
 .screen {
     background-size: 100% 100%;
-    grid-column-start: 2;
-    grid-row-start: 2;
-    display: grid;
-    grid-template-rows: 50px 85px 50px;
 
 }
 .transport {

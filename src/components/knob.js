@@ -3,15 +3,15 @@ import KnobBG from "../assets/img/knob-matt-bg.png";
 import PEP from "pepjs";
 import $ from "jquery";
 
-const kCtrlHW = 50;
+const kCtrlHW = 60;
 const kRadianRangeScalar = 1.5;
 const kMinRadScalar = 0.75;
 const kRadianMax = kRadianRangeScalar * Math.PI;
 const kRadianMin = kMinRadScalar * Math.PI;
-const kOutlineRadius = 1.5;
+const kOutlineRadius = 1.75;
 const kOutlineMin = kCtrlHW * 0.475;
 const kInnerMin = kCtrlHW * 0.35;
-const kInnerRadius = kCtrlHW * 0.11;
+const kInnerRadius = kCtrlHW * 0.05;
 const kClockHandRadius = 0.05;
 const kDarkishYellow = "#FFB80D";
 const kLightGrey = "#353535";
@@ -28,12 +28,11 @@ export default class Knob extends Component
 
     componentDidMount() 
     {
-        // this.context = this.el.getContext("2d");
-        // $(this.el).on("pointerdown", this.pointerDown);
-        // this.centerX = this.el.width / 2;
-        // this.centerY = this.el.height / 2;
-        // this.context = this.el.getContext("2d");
-        // this.update(0.5);
+        this.context = this.el.getContext("2d");
+        $(this.el).on("pointerdown", this.pointerDown);
+        this.centerX = this.el.width / 2;
+        this.centerY = this.el.height / 2;
+        this.update(0.5);
     }
 
     componentWillUnmount() 
@@ -41,16 +40,19 @@ export default class Knob extends Component
 
     }
 
-    componentDidUpdate() 
-    {
-        this.update();
-    }
+    // componentDidUpdate() 
+    // {
+    //     this.update();
+    // }
 
     update(inValue = 0)
     {
-        // let radVal = this._normValueToRadians(inValue);
-        // this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
-        // this._drawArcs(radVal);
+        if(this.el)
+        {
+            let radVal = this._normValueToRadians(inValue);
+            this.el.getContext("2d").clearRect(0, 0, this.el.width, this.el.height);
+            this._drawArcs(radVal);
+        }
     }
 
     _normValueToRadians(inNormValue)
@@ -68,18 +70,18 @@ export default class Knob extends Component
         // draw arc for inValue
         this._drawArc(kInnerMin, kInnerMin + kInnerRadius, kRadianMin, inRadVal);
         // draw outer cirle
-        this._drawArc(kOutlineMin, kOutlineMin + kOutlineRadius, Math.PI * 0, Math.PI * 2);
+        //this._drawArc(kOutlineMin, kOutlineMin + kOutlineRadius, Math.PI * 0, Math.PI * 2);
     }
 
-    _drawArc(kInnerRadius, outterRadius, sRadian, eRadian, inFillStyle = kDarkishYellow)
+    _drawArc(kInnerRadius, outterRadius, sRadian, eRadian, inFillStyle = "rgba(0,255,255,0.75)")
     {
-        this.context.beginPath();
-        this.context.arc(this.centerX, this.centerY, outterRadius, sRadian, eRadian, false);
-        this.context.arc(this.centerX, this.centerY, kInnerRadius, eRadian, sRadian, true);
-        this.context.closePath();
-        this.context.fillStyle = inFillStyle;
-        this.context.strokeStyle = this.context.fillStyle;
-        this.context.fill();
+        this.el.getContext("2d").beginPath();
+        this.el.getContext("2d").arc(this.centerX, this.centerY, outterRadius, sRadian, eRadian, false);
+        this.el.getContext("2d").arc(this.centerX, this.centerY, kInnerRadius, eRadian, sRadian, true);
+        this.el.getContext("2d").closePath();
+        this.el.getContext("2d").fillStyle = inFillStyle;
+        this.el.getContext("2d").strokeStyle = this.context.fillStyle;
+        this.el.getContext("2d").fill();
     }
 
     render() {
@@ -87,29 +89,14 @@ export default class Knob extends Component
             backgroundImage: 'url(' + KnobBG + ')'
         };
         const classList = "knob " + this.props.className;
+        if(this.el)
+        {
+            this.update(0);
+        }
         return (
-            <div className={classList}
-            ref={node => this.el = node}
-            style={bgStyle}
-            ></div>
+            <div className={classList} style={bgStyle}>
+                <canvas ref={node => this.el = node} width={kCtrlHW} height={kCtrlHW} className="chan-knob-inner"/>
+            </div>
         );
-        // return (
-        //     <div className="knob" 
-        //     ref={node => this.el = node}
-        //     style={bgStyle}
-        //     >
-        //         <div className="knob-dot" 
-        //         ref={node => this.el = node}
-        //         style={knobStyle}
-        //         ></div>
-        //     </div>
-        // );
-        // if(this.mounted)
-        // {
-        //     this.update();
-        // }
-        // return (
-        //     <canvas ref={node => this.el = node} width={kCtrlHW} height={kCtrlHW} className={this.props.className}/>
-        // );
     }
 }

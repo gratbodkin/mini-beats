@@ -3,23 +3,16 @@ const rewireProvidePlugin = require('react-app-rewire-provide-plugin')
 module.exports = (config, env) => {
   config.module.rules.push(
     {
-        test: /\.html$/,
+        test: /\.(html)$/,
         loader: 'html-loader'
     });
     config.module.rules.push(
     {
-      test : /\.(eot|ttf|wav|mp3)$/,
-      loader : "file-loader",
+        test: /\.(glsl|frag|vert)$/,
+        use: [
+          require.resolve('raw-loader'),
+          require.resolve('glslify-loader'),
+        ]
     });
-    config.module.rules.push(
-    {
-      test: /bootstrap\/dist\/js\/umd\//,
-      loader: 'imports-loader?jQuery=jquery'
-    });
-    config.plugins.push(
-      rewireProvidePlugin(config, env, {
-      'window.jQuery': 'jquery'
-  })
-    );
     return config;
 }
